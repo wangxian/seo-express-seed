@@ -12,7 +12,7 @@ var url = system.args[1];
 // Abort css & img
 page.onResourceRequested = function(requestData, request) {
   if ( (/\.css|\.png|\.jpg|\.gif/gi).test(requestData['url']) ) {
-    console.log('The url of the request is matching. Aborting: ' + requestData['url']);
+    // console.log('The url of the request is matching. Aborting: ' + requestData['url']);
     request.abort();
   }
 };
