@@ -8,7 +8,7 @@ router.get('/article/:id', function(req, res) {
     {"author": "毛泽东", "title" : "文章二", "content": "沁园春长沙.........JavaScript function for hashing messages with MD5."}
   ];
 
-  console.log(req.param("id"))
+  // console.log(req.param("id"))
   var id = parseInt(req.param("id"), 10) - 1;
   var article = typeof data[id] !== "undefined" ? data[id] : {"author": "", "title" : "", "content": ""}
   res.json(article);

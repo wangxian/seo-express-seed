@@ -8,7 +8,6 @@
     .on { display: block; }
     li { padding: 10px 0; }
     </style>
-    <meta name="fragment" content="!" />
   </head>
   <body>
     <h1><%= title %></h1>
@@ -61,11 +60,16 @@
         goPanel(this.getAttribute("href"));
         return false;
       });
+
+      // goback
+      $("#goback").on("click", function(){
+        goPanel("#!/index"); return false;
+      });
     })
     </script>
 
     <hr>
-    <p><a href="/">Go to Home page</a></p>
+    <p><a id="goback" href="/">Go to Home page</a></p>
     <pre>
     测试：
     1. 使用浏览器点击。
