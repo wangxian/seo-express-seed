@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/public/css/style.css' />
+    <style>
+    .panel{ display: none; }
+    .on { display: block; }
+    li { padding: 10px 0; }
+    </style>
+    <meta name="fragment" content="!" />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <hr>
+
+    <div id="index" class="panel">
+      <p>文章列表</p>
+      <ul>
+        <li><a href="#!/article/1/">文章一</a></li>
+        <li><a href="#!/article/2/">文章二</a></li>
+      </ul>
+    </div>
+
+    <div id="article" class="panel">
+    加载中...
+    </div>
+
+
+    <script type="text/javascript" src="/public/js/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+
+      // Panel 切换
+      function goPanel(panel){
+        window.location.hash = panel;
+
+        panel = panel.replace("#!/", "");
+        console.log(panel)
+
+        $(".panel.on").removeClass("on");
+        if(panel === "index") {
+          $("#index").addClass("on");
+        } else {
+          $.getJSON("/api/"+ panel, function(d){
+            $("#article").html("<p>作者： "+ d.author +"</p><p>内容："+ d.content +"</p>")
+          });
+          $("#article").addClass("on");
+        }
+
+      }
+
+      // Dispath url
+      var defaultPanel;
+      if(window.location.hash.length === 0) defaultPanel = "#!/index";
+      else defaultPanel = window.location.hash;
+      goPanel(defaultPanel);
+
+      // 切换界面
+      $("ul a").on("click", function(){
+        goPanel(this.getAttribute("href"));
+        return false;
+      });
+    })
+    </script>
+
+    <hr>
+    <p><a href="/">Go to Home page</a></p>
+    <pre>
+    测试：
+    1. 使用浏览器点击。
+    2. 使用curl，
+    curl http://localhost:18080/
+    curl http://localhost:18080/article/1
+    curl http://localhost:18080/article/1
+    </pre>
+
+    <img src="/public/img/2.jpg" alt="">
+
+  </body>
+</html>
