@@ -18,7 +18,7 @@ npm start
 ```
 
 
-## test use CURL
+## Test use CURL
 
 ```
 curl http://localhost:18080/

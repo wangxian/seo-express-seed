@@ -1,8 +1,8 @@
 {
-  "name": "tulvxing",
+  "name": "myapp",
   "version": "1.0.0",
   "author": "wangxian",
-  "description": "The first bae nodejs app!",
+  "description": "SEO app!",
   "scripts": {
     "start": "node ./bin/www"
   },
@@ -14,6 +14,7 @@
     "body-parser": "~1.0.0",
     "debug": "~0.7.4",
     "ejs": "~0.8.5",
-    "phantomjs": "^1.9.7-4"
+    "phantomjs": "^1.9.7-4",
+    "express-cluster": "0.0.2"
   }
 }
