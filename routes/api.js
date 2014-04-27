@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/article/:id', function(req, res) {
-  var data = [
+  var article = [
     {
       "author": "木頭",
       "title" : "三星堆遗址",
@@ -49,10 +49,15 @@ router.get('/article/:id', function(req, res) {
     }
   ];
 
-  // console.log(req.param("id"))
-  var id = parseInt(req.param("id"), 10) - 1;
-  var article = typeof data[id] !== "undefined" ? data[id] : {"author": "", "title" : "", "content": ""}
-  res.json(article);
+  var id = parseInt(req.param("id"), 10);
+  if(id > 0) {
+    id = id - 1;
+    var data = typeof article[id] !== "undefined" ? article[id] : {"author": "", "title" : "", "content": ""}
+    res.json(data);
+  } else {
+    var titles = article.map(function(d){ return d.title; })
+    res.json(titles);
+  }
 });
 
 router.get('/users', function(req, res) {

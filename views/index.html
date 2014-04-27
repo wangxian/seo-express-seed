@@ -20,8 +20,7 @@
     <div id="index" class="panel">
       <p>文章列表</p>
       <ul>
-        <li><a href="#!/article/1/">三星堆遗址</a></li>
-        <li><a href="#!/article/2/">沁园春长沙（1925年12月）</a></li>
+        加载中...
       </ul>
     </div>
 
@@ -39,10 +38,14 @@
         window.location.hash = panel;
 
         panel = panel.replace("#!/", "");
-        console.log(panel)
+        // console.log(panel)
 
         $(".panel.on").removeClass("on");
         if(panel === "index") {
+          $.getJSON("/api/article/0", function(d){
+            var html = $.map(d, function(v, k){ return '<li><a href="#!/article/'+ (k+1) +'">'+ v + "</a></li>"; });
+            $("#index ul").html(html);
+          });
           $("#index").addClass("on");
           $("title").text("SEO in SERVER AND Client Slide");
         } else {
@@ -61,8 +64,8 @@
       else defaultPanel = window.location.hash;
       goPanel(defaultPanel);
 
-      // 切换界面
-      $("ul a").on("click", function(){
+      // 切换文章
+      $("#index ul").on("click", "a", function(){
         goPanel(this.getAttribute("href"));
         return false;
       });
