@@ -2,22 +2,26 @@
 <html>
   <head>
     <title><%= title %></title>
+    <meta name="author" content="wangxian" />
+    <meta name="description" content="HKUPS is an open-source JavaScript platform for building top-quality web apps in a fraction of the time, whether you're an expert developer or just getting started."/>
     <link rel='stylesheet' href='/public/css/style.css' />
     <style>
     .panel{ display: none; }
     .on { display: block; }
     li { padding: 10px 0; }
+    #article section { width: 500px; line-height: 22px; color: #333; font-size: 12px;  }
     </style>
   </head>
   <body>
     <h1><%= title %></h1>
+    <p><a id="goback" href="/">Go to Home page</a></p>
     <hr>
 
     <div id="index" class="panel">
       <p>文章列表</p>
       <ul>
-        <li><a href="#!/article/1/">文章一</a></li>
-        <li><a href="#!/article/2/">文章二</a></li>
+        <li><a href="#!/article/1/">三星堆遗址</a></li>
+        <li><a href="#!/article/2/">沁园春长沙（1925年12月）</a></li>
       </ul>
     </div>
 
@@ -40,9 +44,11 @@
         $(".panel.on").removeClass("on");
         if(panel === "index") {
           $("#index").addClass("on");
+          $("title").text("SEO in SERVER AND Client Slide");
         } else {
           $.getJSON("/api/"+ panel, function(d){
-            $("#article").html("<p>作者： "+ d.author +"</p><p>内容："+ d.content +"</p>")
+            $("title").text(d.title);
+            $("#article").html("<h1>标题："+ d.title +" <em>("+ d.author +")</em></h1><h2>内容：</h2><section>"+ d.content +"</section>")
           });
           $("#article").addClass("on");
         }
@@ -69,7 +75,6 @@
     </script>
 
     <hr>
-    <p><a id="goback" href="/">Go to Home page</a></p>
     <pre>
     测试：
     1. 使用浏览器点击。
@@ -79,7 +84,7 @@
     curl http://localhost:18080/article/1
     </pre>
 
-    <img src="/public/img/2.jpg" alt="">
+    <img src="/public/img/2.jpg" alt="" width="100px">
 
   </body>
 </html>
