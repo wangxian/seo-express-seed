@@ -23,7 +23,7 @@ router.get('/*', function(req, res){
       res.end(stdout)
     });
   } else {
-    res.redirect(301, '/#!/index');
+    res.redirect(301, '/#!'+ req.url);
   }
 });
 
