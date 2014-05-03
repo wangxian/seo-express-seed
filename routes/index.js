@@ -6,7 +6,7 @@ var util    = require("../libs/util")
 
 router.get('/', function(req, res) {
   if(!util.isRobots(req)) {
-    res.render('index.html', { title: 'WEB DEV seed in SERVER AND Client Slide' });
+    res.render('index.html', { title: '前后端解耦合开发，支持搜索引擎蜘蛛 - 演示' });
   } else {
     fetch("/", function(err, stdout, stderr){
       res.end(stdout)
