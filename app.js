@@ -24,6 +24,9 @@ app.use(cookieParser());
 app.use('/public/', express.static(path.join(__dirname, 'public')));
 
 app.use('/api', api);
+app.use('/robots.txt', function(req, res){
+  res.sendfile("public/robots.txt")
+});
 app.use('/', routes);
 
 /// catch 404 and forwarding to error handler
