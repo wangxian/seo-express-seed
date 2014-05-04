@@ -9,7 +9,7 @@ module.exports = function(url, callback, useCache) {
 
   // 缓存过期了
   if(typeof CACHE[url] !== "undefined" ) {
-    if( CACHE[url].created + 1e6 < Date.now() ) {
+    if( CACHE[url].created + 2592000 < Date.now() ) {
       delete CACHE[url];
     } else {
       callback(null, CACHE[url].data, null);
