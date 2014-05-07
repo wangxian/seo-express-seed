@@ -32,6 +32,7 @@ page.open(url, function(status) {
         var out = page.content;
         out = out.replace(/<script[^>]+>(.|\n|\r)*?<\/script\s*>/ig, '');
         out = out.replace(/#!/g, "");
+        // out = out.replace(/\n\n/g, "")
         console.log(out);
         phantom.exit();
       }

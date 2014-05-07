@@ -6,7 +6,8 @@ var util    = require("../libs/util")
 
 router.get('/', function(req, res) {
   if(!util.isRobots(req)) {
-    res.render('index.html', { title: '前后端解耦合开发，支持搜索引擎蜘蛛 - 演示' });
+    // res.render(req.app.settings.rootdir + "/public/index.html", { title: '前后端解耦合开发，支持搜索引擎蜘蛛 - 演示' });
+    res.sendfile(req.app.settings.rootdir + "/public/index.html");
   } else {
     fetch("/", function(err, stdout, stderr){
       res.end(stdout)
@@ -30,8 +31,8 @@ router.get('/*', function(req, res){
 // 启动后把首页给缓存下来，给spider
 setTimeout(function(){
   fetch("/", function(){ console.log("缓存首页完成！"); });
-  // fetch("/#!/article/1", function(){ console.log("缓存/article/1完成！"); });
-  // fetch("/#!/article/2", function(){ console.log("缓存/article/2完成！");  });
+  fetch("/#!/article/1", function(){ console.log("缓存/article/1完成！"); });
+  fetch("/#!/article/2", function(){ console.log("缓存/article/2完成！");  });
 }, 1e3)
 
 module.exports = router;
