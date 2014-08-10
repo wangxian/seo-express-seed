@@ -3,7 +3,7 @@ var childProcess = require('child_process');
 var phantomjs    = require('phantomjs');
 var binPath      = phantomjs.path;
 
-var CACHE = {}
+var CACHE = {};
 
 module.exports = function(url, callback, useCache) {
 
@@ -20,7 +20,7 @@ module.exports = function(url, callback, useCache) {
   var execFile = path.join(__dirname + '/fetch.js');
   var domain = "http://localhost:"+ require("../../app").get("port");
   var childArgs = [ execFile, domain + url ];
-  // console.log(childArgs)
+  // console.log(binPath, childArgs);
 
   // 创建子进程
   childProcess.execFile(binPath, childArgs, function(err, stdout, stderr) {
@@ -31,4 +31,4 @@ module.exports = function(url, callback, useCache) {
 
     callback(err, stdout, stderr);
   });
-}
+};
