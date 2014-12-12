@@ -19,12 +19,25 @@ li { padding: 10px 0; }
 
 <h1 id="site-title">前后端解耦合开发，支持搜索引擎蜘蛛 - 演示</h1>
 <h2>支持：Baiduspider|Googlebot|BingBot|MSNBot|curl|Wget</h2>
-<p><a id="goback" href="/"><-Go to Home page</a></p>
-<hr>
+<p id="goback"><a href="/">&lt;- Go to Home page</a></p>
+<hr />
 
 <div id="index" class="panel">
+
   <p>文章列表</p>
   <ul>加载中...</ul>
+
+  <hr />
+  <pre>
+  测试：
+  1. 使用浏览器点击。
+  2. 使用curl，
+  curl http://hostname:18080/
+  curl http://hostname:18080/article/1
+  curl http://hostname:18080/article/2
+  </pre>
+
+  <img src="/assets/img/2.jpg" alt="" width="100px">
 </div>
 
 <div id="article" class="panel">加载中...</div>
@@ -42,18 +55,21 @@ $(function(){
 
     $(".panel.on").removeClass("on");
     if(panel === "index") {
+      document.title = document.getElementById("site-title").innerHTML;
       $.getJSON("/api/article/0", function(d){
         var html = $.map(d, function(v, k){ return '<li><a href="#!/article/'+ (k+1) +'.html">'+ v + "</a></li>"; });
         $("#index ul").html(html);
       });
       $("#index").addClass("on");
-      $("title").text($("#site-title").text());
+      $("#goback").hide();
     } else {
+      document.title = document.getElementById('article').innerHTML = "加载中...";
       $.getJSON("/api/"+ panel, function(d){
-        $("title").text(d.title +" - hk.wangxian.me");
-        $("#article").html("<h1>标题："+ d.title +" <em>("+ d.author +")</em></h1><h2>内容：</h2><section>"+ d.content +"</section>");
+        document.title = d.title +" - hk.wangxian.me";
+        document.getElementById('article').innerHTML = "<h1>标题："+ d.title +" <em>("+ d.author +")</em></h1><h2>内容：</h2><section>"+ d.content +"</section>";
       });
       $("#article").addClass("on");
+      $("#goback").show();
     }
 
   }
@@ -76,17 +92,5 @@ $(function(){
   });
 });
 </script>
-
-<hr>
-<pre>
-测试：
-1. 使用浏览器点击。
-2. 使用curl，
-curl http://hostname:18080/
-curl http://hostname:18080/article/1
-curl http://hostname:18080/article/2
-</pre>
-
-<img src="/assets/img/2.jpg" alt="" width="100px">
 </body>
 </html>
