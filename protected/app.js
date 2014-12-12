@@ -12,7 +12,7 @@ var app    = express();
 
 // app root dir
 var rootdir = path.join(__dirname, '..');
-app.set('rootdir', rootdir)
+app.set('rootdir', rootdir);
 
 
 // view engine setup
@@ -22,14 +22,14 @@ app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
 app.use(favicon(rootdir + "/public/favicon.ico"));
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 
 app.use('/assets', express.static(rootdir + '/public/assets'));
 app.use('/api', api);
-app.use('/robots.txt', function(req, res){ res.sendfile(rootdir + "/public/robots.txt") });
+app.use('/robots.txt', function(req, res){ res.sendfile(rootdir + "/public/robots.txt"); });
 app.use('/', routes);
 
 /// catch 404 and forwarding to error handler
