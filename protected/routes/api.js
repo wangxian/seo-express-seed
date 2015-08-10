@@ -49,7 +49,7 @@ var article = [
 
 /* GET users listing. */
 router.get('/article/:id', function(req, res) {
-  var id = parseInt(req.param("id"), 10);
+  var id = parseInt(req.params.id, 10);
   // console.log(id, req.param("id"));
   if(id > 0) {
     id = id - 1;

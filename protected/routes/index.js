@@ -7,7 +7,7 @@ var util    = require("../libs/util");
 router.get('/', function(req, res) {
   if(!util.isRobots(req)) {
     // res.render(req.app.settings.rootdir + "/public/index.html", { title: '前后端解耦合开发，支持搜索引擎蜘蛛 - 演示' });
-    res.sendfile(req.app.settings.rootdir + "/public/index.html");
+    res.sendFile(req.app.settings.rootdir + "/public/index.html");
   } else {
     fetch("/", function(err, stdout, stderr){
       res.end(stdout);
